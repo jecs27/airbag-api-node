@@ -1,0 +1,35 @@
+{
+    "compilerOptions": {
+      "baseUrl": ".",
+      "lib": ["ES2020"], 
+      "module": "commonjs",
+      "esModuleInterop": true,
+      "target": "ES2020",
+      "noImplicitAny": true,
+      "moduleResolution": "node", 
+      "sourceMap": true,
+      "outDir": "./dist",
+      "removeComments": true,
+      "experimentalDecorators": true,
+      "resolveJsonModule": true,
+      "emitDecoratorMetadata": true,
+      "allowSyntheticDefaultImports": true, 
+      "noUnusedParameters": true,
+      "noUnusedLocals": true,
+      "paths": {
+        "*": ["node_modules/*"]
+      }
+    },
+    "include": [
+      "src/index.ts",
+      "src/**/*.ts"
+    ],
+    "exclude": [
+      "node_modules/**/*",
+      ".vscode/**/*"
+    ],
+    "types": ["node"],
+    "ts-node": {
+      "require": ["tsconfig-paths/register"] 
+    }
+  }
