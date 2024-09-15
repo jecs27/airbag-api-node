@@ -5,8 +5,8 @@ import logger from 'morgan';
 import cors from 'cors';
 
 import { UsersRoute } from '@routes/users.routes';
+import { VehiclesRoute } from '@routes/vehicles.routes';
 
-import * as packagesJson from '../package.json';
 import { listRoutes } from './utils/routes.helper';
 import connectDB from '@database/nosql/connection';
 
@@ -22,11 +22,11 @@ app.use(cookieParser());
 app.disable('etag');
 
 UsersRoute(app);
-
+VehiclesRoute(app);
 connectDB();
 
 app.listen(port, () => {
-  console.log(`[server]: Server is running  http://localhost:${port} - V${packagesJson.version}`);
+  console.log(`[server]: Server is running  http://localhost:${port}`);
   listRoutes(app);
   app.get('/', (_req, res) => {
     res.send('[server]: Server is running');

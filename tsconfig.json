@@ -1,6 +1,5 @@
 {
     "compilerOptions": {
-      "baseUrl": ".",
       "lib": ["ES2020"], 
       "module": "commonjs",
       "esModuleInterop": true,
@@ -9,6 +8,8 @@
       "moduleResolution": "node", 
       "sourceMap": true,
       "outDir": "./dist",
+      "rootDir": "./src",
+      "baseUrl": ".",
       "removeComments": true,
       "experimentalDecorators": true,
       "resolveJsonModule": true,
