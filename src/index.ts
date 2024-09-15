@@ -10,6 +10,8 @@ import { VehiclesRoute } from '@routes/vehicles.routes';
 import { listRoutes } from './utils/routes.helper';
 import connectDB from '@database/nosql/connection';
 
+import { syncUsersJob } from './jobs/users.jobs';
+
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
@@ -24,6 +26,8 @@ app.disable('etag');
 UsersRoute(app);
 VehiclesRoute(app);
 connectDB();
+
+syncUsersJob();
 
 app.listen(port, () => {
   console.log(`[server]: Server is running  http://localhost:${port}`);
