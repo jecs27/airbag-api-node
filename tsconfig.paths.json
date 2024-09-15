@@ -2,7 +2,14 @@
     "compilerOptions": {
       "baseUrl": ".",
       "paths": {
-        "*": ["node_modules/*"]
+        "*": ["node_modules/*"],
+        "@routes/*": ["src/routes/*"],
+        "@controllers/*": ["src/controllers/*"],
+        "@utils/*": ["src/utils/*"],
+        "@schemas/*": ["src/schemas/*"],
+        "@middleware/*": ["src/middleware/*"],
+        "@database/*": ["src/database/*"],
+        "@utils": ["src/utils"]
       }
     }
 }  

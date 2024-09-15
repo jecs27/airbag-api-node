@@ -4,7 +4,11 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import cors from 'cors';
 
+import { UsersRoute } from '@routes/users.routes';
+
 import * as packagesJson from '../package.json';
+import { listRoutes } from './utils/routes.helper';
+import connectDB from '@database/nosql/connection';
 
 dotenv.config();
 const app = express();
@@ -17,8 +21,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.disable('etag');
 
+UsersRoute(app);
+
+connectDB();
+
 app.listen(port, () => {
-    console.log(`[server]: Server is running  http://localhost:${port} - V${packagesJson.version}`);
+  console.log(`[server]: Server is running  http://localhost:${port} - V${packagesJson.version}`);
+  listRoutes(app);
   app.get('/', (_req, res) => {
     res.send('[server]: Server is running');
   });
