@@ -6,6 +6,8 @@ interface IUser extends Document {
   phone: string;
   email: string;
   temporaryCode: string | null;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 const userSchema: Schema = new Schema({
@@ -13,7 +15,9 @@ const userSchema: Schema = new Schema({
   name: { type: String, required: true },
   phone: { type: String, required: true },
   email: { type: String, required: true, unique: true },
-  temporaryCode: { type: String, default: null }
+  temporaryCode: { type: String, default: null },
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now }
 });
 
 const User = mongoose.model<IUser>('Users', userSchema);
