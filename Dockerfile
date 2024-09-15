@@ -8,7 +8,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Install project dependencies
-RUN npm install
+RUN npm ci --legacy-peer-deps
 
 # Install PM2 globally
 RUN npm install -g pm2
