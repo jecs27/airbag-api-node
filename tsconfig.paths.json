@@ -7,7 +7,9 @@
         "@controllers/*": ["src/controllers/*"],
         "@utils/*": ["src/utils/*"],
         "@schemas/*": ["src/schemas/*"],
-        "@middleware/*": ["src/middleware/*"]
+        "@middleware/*": ["src/middleware/*"],
+        "@database/*": ["src/database/*"],
+        "@utils": ["src/utils"]
       }
     }
 }  
