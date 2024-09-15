@@ -8,7 +8,6 @@
     "start": "ts-node ./src/index.ts",
     "dev": "nodemon --exec ts-node ./src/index.ts",
     "build": "tsc",
-    "lint": "eslint 'src/**/*.{ts,js}' --fix",
     "clean": "rimraf dist"
   },
   "author": "jesuscalderon2708@gmail.com",
@@ -33,6 +32,7 @@
     "typeorm": "^0.3.20"
   },
   "devDependencies": {
+    "@shopify/eslint-plugin": "^46.0.0",
     "@types/bcrypt": "^5.0.0",
     "@types/cookie-parser": "^1.4.4",
     "@types/cors": "^2.8.14",
