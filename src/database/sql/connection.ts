@@ -3,6 +3,8 @@ import 'dotenv/config';
 import { DataSource } from 'typeorm';
 import UserPG from './entities/users.entity';
 
+/* This code snippet is setting up a data source configuration for a PostgreSQL database using TypeORM
+in a TypeScript environment. */
 const {
   DATABASE_HOST,
   DATABASE_PORT,

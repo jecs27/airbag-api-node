@@ -3,6 +3,10 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+/**
+ * The function `connectDB` connects to a MongoDB database using the provided URI or a default local
+ * URI.
+ */
 const connectDB = async () => {
   try {
     const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/airbag_db';
