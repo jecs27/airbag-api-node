@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Su código OTP</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .logo img {
+            max-width: 150px;
+        }
+        .container {
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            padding: 20px;
+        }
+        .otp-code {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #e9e9e9;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <img src="https://i.ibb.co/whg6hZy/airbag-logo.png" alt="Logo de la empresa">
+    </div>
+    <div class="container">
+        <h1>Su código OTP</h1>
+        <p>Estimado usuario,</p>
+        <p>Aquí está su código de verificación de un solo uso (OTP):</p>
+        <div class="otp-code">{{otp}}</div>
+        <p>Por favor, utilice este código para completar su proceso de Ingreso.</p>
+        <p>Si no ha solicitado este código, por favor ignore este correo electrónico.</p>
+        <p>Gracias,<br>El equipo de soporte</p>
+    </div>
+</body>
+</html>
