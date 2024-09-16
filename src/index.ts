@@ -13,6 +13,9 @@ import connectDB from '@database/nosql/connection';
 import { syncUsersJob } from './jobs/users.jobs';
 import { requestLogger } from '@middleware/requestLoger.middleware';
 
+import * as Sentry from "@sentry/node";
+import { nodeProfilingIntegration } from "@sentry/profiling-node";
+
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
@@ -30,6 +33,13 @@ VehiclesRoute(app);
 
 connectDB();
 syncUsersJob();
+
+Sentry.init({
+  dsn: process.env.SENTRY_DSN,
+  integrations: [nodeProfilingIntegration()],
+  tracesSampleRate: 1.0,
+});
+
 
 app.listen(port, () => {
   console.log(`[server]: Server is running  http://localhost:${port}`);
