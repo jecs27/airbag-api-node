@@ -11,6 +11,7 @@ import { listRoutes } from './utils/routes.helper';
 import connectDB from '@database/nosql/connection';
 
 import { syncUsersJob } from './jobs/users.jobs';
+import { requestLogger } from '@middleware/requestLoger.middleware';
 
 dotenv.config();
 const app = express();
@@ -23,6 +24,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.disable('etag');
 
+app.use(requestLogger);
 UsersRoute(app);
 VehiclesRoute(app);
 
