@@ -10,6 +10,7 @@ interface IUser extends Document {
   updatedAt: Date;
 }
 
+// Schema definition for the User model
 const userSchema: Schema = new Schema({
   uuid: { type: String, required: true },
   name: { type: String, required: true },
