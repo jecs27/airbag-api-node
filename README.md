@@ -113,4 +113,251 @@ Para ejecutar las migraciones de TypeORM, sigue estos pasos:
 4. Después de crear una nueva migración, asegúrate de ejecutar nuevamente el comando `migration:run` para aplicar los cambios.
 
 
+## Cómo consumir la API
+
+Para utilizar esta API, sigue estos pasos:
+
+1. Registro de usuario:
+   - Método: POST
+   - Ruta: `/users`
+   - Body:
+     ```json
+     {
+       "name": "prueba",
+       "email": "email@email.com",
+       "phone": "5555555555"
+     }
+     ```
+   - Respuesta exitosa:
+     ```json
+     {
+       "status": 201,
+       "message": "User created",
+       "data": {
+         "user": {
+           "uuid": "generated-uuid",
+           "name": "prueba",
+           "email": "email@email.com",
+           "phone": "5555555555"
+         }
+       }
+     }
+     ```
+
+2. Iniciar sesión:
+   - Método: POST
+   - Ruta: `/users/sign-in`
+   - Body:
+     ```json
+     {
+       "email": "email@email.com"
+     }
+     ```
+   - Respuesta exitosa:
+     ```json
+     {
+       "status": 200,
+       "message": "Sign in successful, code sent to email",
+       "data": {}
+     }
+     ```
+
+3. Completar login:
+   - Método: POST
+   - Ruta: `/login`
+   - Body:
+     ```json
+     {
+       "email": "email@email.com",
+       "code": "código-recibido-por-email"
+     }
+     ```
+   - Respuesta exitosa:
+     ```json
+     {
+       "status": 200,
+       "message": "Login successful",
+       "data": {
+         "user": {
+           "uuid": "user-uuid",
+           "email": "email@email.com"
+         },
+         "token": "jwt-token"
+       }
+     }
+     ```
+
+4. Obtener datos del usuario:
+   - Método: GET
+   - Ruta: `/users`
+   - Headers:
+     ```
+     Authorization: Bearer jwt-token
+     ```
+   - Respuesta exitosa:
+     ```json
+     {
+       "status": 200,
+       "message": "User data",
+       "data": {
+         "user": {
+           "uuid": "user-uuid",
+           "name": "prueba",
+           "email": "jesuscalderon2708@gmail.com",
+           "phone": "5555555555"
+         }
+       }
+     }
+     ```
+
+Asegúrate de incluir el token JWT en el header `Authorization` para las rutas protegidas después de iniciar sesión.
+
+Para los endpoint de vehiculos es necesario el uso de jwt para tomar el uso del usuario
+
+
+5. Crear vehículo:
+   - Método: POST
+   - Ruta: `/vehicles`
+   - Headers:
+     ```
+     Authorization: Bearer jwt-token
+     ```
+   - Body:
+     ```json
+     {
+       "licensePlate": "ASD-416-A",
+       "vin": "1M8GDM9A_KP042788",
+       "make": "NISSAN",
+       "vehicleType": "SENTRA"
+     }
+     ```
+   - Respuesta exitosa:
+     ```json
+     {
+       "status": 201,
+       "message": "Vehicle created",
+       "data": {
+         "vehicle": {
+           "uuid": "vehicle-uuid",
+           "licensePlate": "ASD-416-A",
+           "vin": "1M8GDM9A_KP042788",
+           "make": "NISSAN",
+           "vehicleType": "SENTRA",
+           "userUuid": "user-uuid"
+         }
+       }
+     }
+     ```
+
+6. Obtener vehículos del usuario:
+   - Método: GET
+   - Ruta: `/vehicles`
+   - Headers:
+     ```
+     Authorization: Bearer jwt-token
+     ```
+   - Respuesta exitosa:
+     ```json
+     {
+       "status": 200,
+       "message": "User vehicles",
+       "data": {
+         "vehicles": [
+           {
+             "uuid": "vehicle-uuid-1",
+             "licensePlate": "ASD-416-A",
+             "vin": "1M8GDM9A_KP042788",
+             "make": "NISSAN",
+             "vehicleType": "SENTRA"
+           },
+           {
+             "uuid": "vehicle-uuid-2",
+             "licensePlate": "XYZ-789-B",
+             "vin": "2N9GDM9B_LP042789",
+             "make": "TOYOTA",
+             "vehicleType": "COROLLA"
+           }
+         ]
+       }
+     }
+     ```
+
+7. Obtener un vehículo específico:
+   - Método: GET
+   - Ruta: `/vehicles/:uuid`
+   - Headers:
+     ```
+     Authorization: Bearer jwt-token
+     ```
+   - Respuesta exitosa:
+     ```json
+     {
+       "status": 200,
+       "message": "Vehicle data",
+       "data": {
+         "vehicle": {
+           "uuid": "vehicle-uuid",
+           "licensePlate": "ASD-416-A",
+           "vin": "1M8GDM9A_KP042788",
+           "make": "NISSAN",
+           "vehicleType": "SENTRA",
+           "userUuid": "user-uuid"
+         }
+       }
+     }
+     ```
+
+8. Actualizar un vehículo:
+   - Método: PUT
+   - Ruta: `/vehicles/:uuid`
+   - Headers:
+     ```
+     Authorization: Bearer jwt-token
+     ```
+   - Body:
+     ```json
+     {
+       "licensePlate": "ASD-416-B",
+       "vin": "1M8GDM9A_KP042788",
+       "make": "NISSAN",
+       "vehicleType": "ALTIMA"
+     }
+     ```
+   - Respuesta exitosa:
+     ```json
+     {
+       "status": 200,
+       "message": "Vehicle updated",
+       "data": {
+         "vehicle": {
+           "uuid": "vehicle-uuid",
+           "licensePlate": "ASD-416-B",
+           "vin": "1M8GDM9A_KP042788",
+           "make": "NISSAN",
+           "vehicleType": "ALTIMA",
+           "userUuid": "user-uuid"
+         }
+       }
+     }
+     ```
+
+9. Eliminar un vehículo:
+   - Método: DELETE
+   - Ruta: `/vehicles/:uuid`
+   - Headers:
+     ```
+     Authorization: Bearer jwt-token
+     ```
+   - Respuesta exitosa:
+     ```json
+     {
+       "status": 200,
+       "message": "Vehicle deleted",
+       "data": {}
+     }
+     ```
+
+Recuerda que para todas las operaciones relacionadas con vehículos, es necesario incluir el token JWT en el header `Authorization` para autenticar al usuario y asociar los vehículos con el usuario correcto.
+
+
 

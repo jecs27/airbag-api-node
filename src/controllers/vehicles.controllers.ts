@@ -161,3 +161,36 @@ export const deleteVehicle = async (req: Request, res: Response) => {
     });
   }
 };
+
+/**
+ * This function retrieves a specific vehicle by its ID for an authorized user.
+ * @param {Request} req - Request object containing information about the HTTP request
+ * @param {Response} res - The `res` parameter in the `getVehicleById` function stands for the response
+ * @returns If the vehicle is found and the user is authorized, a response with status code 200 and the vehicle data is returned.
+ * If the vehicle is not found or the user is not authorized, a response with status code 404 is returned.
+ * If an error occurs during the process, a response with status code 500 is returned.
+ */
+export const getVehicleById = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const userUuid = extractUserFromToken(req);
+    const vehicle = await Vehicle.findOne({ uuid: id, userUuid }).select('-_id -__v');
+    
+    if (!vehicle) {
+      return res.status(404).send({ status: 404, message: 'Vehicle not found or not authorized' });
+    }
+    
+    return res.status(200).send({
+      status: 200,
+      message: 'Vehicle data retrieved successfully',
+      data: { vehicle }
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send({
+      status: 500,
+      message: 'An error occurred while retrieving the vehicle.',
+      data: { error }
+    });
+  }
+};

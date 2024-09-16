@@ -5,6 +5,11 @@ import { sendEmail } from "@utils/mail";
 import { generateTemporaryPassword } from "@utils/temporaryPassword";
 import { extractUserFromToken, generateToken } from "@middleware/auth.middleware";
 import { hashString, validateHash } from "@utils/cipher";
+import path from "path";
+import fs from "fs";
+
+const templatePath = path.join(__dirname, '../helpers/email-templates/otp-message.html');
+const template = fs.readFileSync(templatePath, 'utf-8');
 
 /**
  * This function retrieves user data based on the user UUID extracted from the request token and
@@ -98,7 +103,9 @@ export const signIn = async (req: Request, res: Response) => {
     user.temporaryCode = await hashString(code);
     await user.save();
 
-    sendEmail(email, 'Code verification', `Your code is ${code}`);
+    const emailContent = template.replace('{{otp}}', code);
+
+    sendEmail(email, 'Código de verificación', emailContent);
     return res.status(200).send({ status: 200, message: 'Sign in successful, code sent to email', data: {} });
   } catch (error) {
     console.log(error);
