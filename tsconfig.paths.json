@@ -9,7 +9,7 @@
         "@schemas/*": ["src/schemas/*"],
         "@middleware/*": ["src/middleware/*"],
         "@database/*": ["src/database/*"],
-        "@utils": ["src/utils"]
+        "@utils": ["src/utils"],
       }
     }
 }  
