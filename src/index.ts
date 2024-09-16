@@ -25,8 +25,8 @@ app.disable('etag');
 
 UsersRoute(app);
 VehiclesRoute(app);
-connectDB();
 
+connectDB();
 syncUsersJob();
 
 app.listen(port, () => {
