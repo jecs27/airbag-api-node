@@ -113,4 +113,103 @@ Para ejecutar las migraciones de TypeORM, sigue estos pasos:
 4. Después de crear una nueva migración, asegúrate de ejecutar nuevamente el comando `migration:run` para aplicar los cambios.
 
 
+## Cómo consumir la API
 
+Para utilizar esta API, sigue estos pasos:
+
+1. Registro de usuario:
+   - Método: POST
+   - Ruta: `/users`
+   - Body:
+     ```json
+     {
+       "name": "prueba",
+       "email": "email@email.com",
+       "phone": "5555555555"
+     }
+     ```
+   - Respuesta exitosa:
+     ```json
+     {
+       "status": 201,
+       "message": "User created",
+       "data": {
+         "user": {
+           "uuid": "generated-uuid",
+           "name": "prueba",
+           "email": "email@email.com",
+           "phone": "5555555555"
+         }
+       }
+     }
+     ```
+
+2. Iniciar sesión:
+   - Método: POST
+   - Ruta: `/users/sign-in`
+   - Body:
+     ```json
+     {
+       "email": "email@email.com"
+     }
+     ```
+   - Respuesta exitosa:
+     ```json
+     {
+       "status": 200,
+       "message": "Sign in successful, code sent to email",
+       "data": {}
+     }
+     ```
+
+3. Completar login:
+   - Método: POST
+   - Ruta: `/login`
+   - Body:
+     ```json
+     {
+       "email": "email@email.com",
+       "code": "código-recibido-por-email"
+     }
+     ```
+   - Respuesta exitosa:
+     ```json
+     {
+       "status": 200,
+       "message": "Login successful",
+       "data": {
+         "user": {
+           "uuid": "user-uuid",
+           "email": "email@email.com"
+         },
+         "token": "jwt-token"
+       }
+     }
+     ```
+
+4. Obtener datos del usuario:
+   - Método: GET
+   - Ruta: `/users`
+   - Headers:
+     ```
+     Authorization: Bearer jwt-token
+     ```
+   - Respuesta exitosa:
+     ```json
+     {
+       "status": 200,
+       "message": "User data",
+       "data": {
+         "user": {
+           "uuid": "user-uuid",
+           "name": "prueba",
+           "email": "jesuscalderon2708@gmail.com",
+           "phone": "5555555555"
+         }
+       }
+     }
+     ```
+
+Asegúrate de incluir el token JWT en el header `Authorization` para las rutas protegidas después de iniciar sesión.
+
+Para los endpoint de vehiculos es necesario el uso de jwt para tomar el uso del usuario
