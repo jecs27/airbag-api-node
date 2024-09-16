@@ -24,8 +24,7 @@
         "@utils/*": ["src/utils/*"],
         "@schemas/*": ["src/schemas/*"],
         "@middleware/*": ["src/middleware/*"],
-        "@database/*": ["src/database/*"],
-        "@utils": ["src/utils"]
+        "@database/*": ["src/database/*"]
       }
     },
     "include": [
