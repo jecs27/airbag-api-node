@@ -2,6 +2,7 @@ import 'dotenv/config';
 
 import { DataSource } from 'typeorm';
 import UserPG from './entities/users.entity';
+import VehiclePG from './entities/vehicles.entity';
 
 /* This code snippet is setting up a data source configuration for a PostgreSQL database using TypeORM
 in a TypeScript environment. */
@@ -23,6 +24,7 @@ export const dataSource = new DataSource({
   logging: ['error'],
   entities: [
     UserPG,
+    VehiclePG
   ],
   migrations: ['src/database/sql/migrations/*.ts'],
   ssl: true,
